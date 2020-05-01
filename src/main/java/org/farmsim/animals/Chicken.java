@@ -8,7 +8,7 @@ public class Chicken extends Animal {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void Collecteggs() {
+	public void collectEggs() {
 		EggNum -= 1;
 	}
 	

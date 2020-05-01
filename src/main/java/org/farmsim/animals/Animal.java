@@ -1,8 +1,8 @@
 
 public class Animal {
 	
-	public String species;
-	public int happiness;
+	private String species;
+	private int happiness;
 	
 	public Animal(String type, int excitement) {
 		species = type;
@@ -11,5 +11,13 @@ public class Animal {
 	
 	public String getSpecies() {
 		return species;
+	}
+	
+	public void play() {
+		happiness += 1;
+	}
+	
+	public int getHappy() {
+		return happiness;
 	}
 }
