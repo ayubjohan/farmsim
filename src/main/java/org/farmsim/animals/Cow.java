@@ -1,18 +1,18 @@
 
 public class Cow extends Animal {
 	
-	public int Milk_amount=10;
+	public int milkAmount=10;
 	
 	public Cow() {
 		super("Cow", 1);
 	}
 	
-	public void Milk_cow() {
-		Milk_amount -= 1;
+	public void milk() {
+		milkAmount -= 1;
 	}
 	
-	public int getMilkamount() {
-		return Milk_amount;
+	public int getMilkAmount() {
+		return milkAmount;
 	}
 
 }
