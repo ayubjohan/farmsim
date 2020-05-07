@@ -1,3 +1,4 @@
+package org.farmsim.animals;
 
 public class Chicken extends Animal {
 	

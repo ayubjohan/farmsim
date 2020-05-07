@@ -1,16 +1,16 @@
 package org.farmsim;
 
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
-import org.farmsim.GameEnv;
+//import org.farmsim.GameEnv;
 
-class GameEnvTests {
+//class GameEnvTests {
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+	//@Test
+	//void test() {
+		//fail("Not yet implemented");
+	//}
 
-}
+//}

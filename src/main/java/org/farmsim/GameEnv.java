@@ -44,9 +44,9 @@ public class GameEnv {
 		// Check if day > this.gameLength
 	}
 	
-	public Farm createFarm(String farmName) {
-		return new Farm(farmName);
-	}
+	//public Farm createFarm(String farmName) {
+		//return new Farm(farmName);
+	//}
 	
 	public void buyItem(int price, Item item) {
 		
