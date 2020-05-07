@@ -1,6 +1,7 @@
 package org.farmsim;
 
-import org.farmsim.Item;
+import java.util.ArrayList;
+import org.farmsim.items.Item;
 import org.farmsim.Farm;
 
 public class GameEnv {
@@ -9,8 +10,8 @@ public class GameEnv {
 	
 	private final String name;
 	private final int gameLength;
-	private final Item[] inventory;
-	private final Farm[] farms;
+	private final ArrayList<Item> inventory;
+	private final ArrayList<Farm> farms;
 
 	private int balance;
 	private int day;
@@ -28,8 +29,8 @@ public class GameEnv {
 		}
 		this.balance = defaultStartingCash;
 		this.day = 0;
-		this.inventory = new Item[]{};
-		this.farms = new Farm[]{};
+		this.inventory = new ArrayList<Item>();
+		this.farms = new ArrayList<Farm>();
 		System.out.println("Welcome to the farm sim " + this.name);
 	}
 	
@@ -44,12 +45,17 @@ public class GameEnv {
 		// Check if day > this.gameLength
 	}
 	
-	public Farm createFarm(String farmName) {
-		return new Farm(farmName);
-	}
+	// public Farm createFarm(String farmName) {
+        // Farm newFarm = new Farm(farmName);
+        // this.farms.add(newFarm);
+        // return newFarm;
+	// }
 	
 	public void buyItem(int price, Item item) {
-		
+        if (this.balance < price) {
+            return;
+        }
+		this.inventory.add(item);
 	}
 	
 	public void useItem(int index, Object... itemArgs) {
@@ -57,7 +63,7 @@ public class GameEnv {
 		// Git love me
 	}
 	
-	public Item[] getInventory () {
+	public ArrayList<Item> getInventory () {
 		return this.inventory;
 	}
 }
