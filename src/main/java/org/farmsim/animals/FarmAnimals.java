@@ -1,3 +1,5 @@
+package org.farmsim.animals;
+
 import java.util.ArrayList;
 
 public class FarmAnimals {
