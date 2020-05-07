@@ -6,7 +6,6 @@ public class Chicken extends Animal {
 
 	public Chicken() {
 		super("Chicked", 1);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void Collecteggs() {
