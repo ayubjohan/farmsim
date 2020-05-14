@@ -19,10 +19,19 @@ public class Farm {
 		
 	}
 	
-	public void fertilize() {
-		this.soilQuality += 5;
-		this.farmHealth += 3;
-	}
+	// public void fertilize() {
+	// 	this.soilQuality += 5;
+	// 	this.farmHealth += 3;
+    // }
+    
+    
+    public void changeSoilQuality (int amount) {
+        this.soilQuality += amount;
+    }
+
+    public void changeFarmHealth (int amount) {
+        this.farmHealth += amount;
+    }
 	
 	public void harvest() {
 		if (this.cropLevel >= 3) {
@@ -53,13 +62,12 @@ public class Farm {
 		
 	}
 	
-	
-	   public static void main(String[] args) {
-		   Farm farm  = new Farm("john", 4, 5, 6, 6);
-		   farm.harvest();
-		   farm.harvest();
-		   farm.harvest();
-		   farm.farmDetails();
-	   }
+	//    public static void main(String[] args) {
+	// 	   Farm farm  = new Farm("john", 4, 5, 6, 6);
+	// 	   farm.harvest();
+	// 	   farm.harvest();
+	// 	   farm.harvest();
+	// 	   farm.farmDetails();
+	//    }
 	
 }
