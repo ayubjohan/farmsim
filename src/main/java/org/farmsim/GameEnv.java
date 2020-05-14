@@ -34,17 +34,35 @@ public class GameEnv {
 		System.out.println("Welcome to the farm sim " + this.name);
 	}
 	
-	public static void main(String[] args) {
-		GameEnv game = new GameEnv("Johan", 7);
-	}
+	// public static void main(String[] args) {
+	// 	GameEnv game = new GameEnv("Johan", 7);
+	// }
 	
 	
-	public void nextDay() {
+	public void nextDay() throws Exception {
+        // Check you can advance to next day...
+        if (this.day >= this.gameLength) {
+            throw new Exception("Can not proceed to next day on the final day. Instead call GameEnv.endGame()");
+        }
 		this.day += 1;
 		// Reset actions etc.
 		// Check if day > this.gameLength
-	}
-	
+    }
+
+    // Ends the game
+    public void endGame() throws Exception {
+        if (this.day != this.gameLength) {
+            throw new Exception("Not the last day.");
+        }
+    }
+    
+    public void addFarm(String name, int health, int waterQuality, int soilQuality, int cropLevel) {
+        this.farms.add(new Farm(name, health, waterQuality, soilQuality, cropLevel));
+    }
+    
+    public ArrayList<Farm> getFarms() {
+        return this.farms;
+    }
 //	 public Farm createFarm(String farmName) {
 //         Farm newFarm = new Farm(farmName);
 //         this.farms.add(newFarm);
@@ -65,5 +83,13 @@ public class GameEnv {
 	
 	public ArrayList<Item> getInventory () {
 		return this.inventory;
-	}
+    }
+    
+    public String getName () {
+        return this.name;
+    }
+
+    public int getDay () {
+        return this.day;
+    }
 }

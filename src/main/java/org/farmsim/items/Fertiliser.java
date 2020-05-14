@@ -1,5 +1,6 @@
 package org.farmsim.items;
 
+import org.farmsim.Farm;
 import org.farmsim.items.Item;
 
 public class Fertiliser extends Item {
@@ -9,5 +10,8 @@ public class Fertiliser extends Item {
 	}
 	
 	// @Override
-	public void use () {}
+	public void use (Farm farm) {
+        farm.changeSoilQuality(5);
+        farm.changeFarmHealth(3);
+    }
 }
