@@ -62,12 +62,13 @@ public class Farm {
 		
 	}
 	
-	//    public static void main(String[] args) {
-	// 	   Farm farm  = new Farm("john", 4, 5, 6, 6);
-	// 	   farm.harvest();
-	// 	   farm.harvest();
-	// 	   farm.harvest();
-	// 	   farm.farmDetails();
-	//    }
+	   public static void main(String[] args) {
+	 	   Farm farm  = new Farm("john", 4, 5, 6, 6);
+	 	   farm.harvest();
+	 	   farm.harvest();
+	 	   farm.harvest();
+
+	 	   farm.farmDetails();
+	    }
 	
 }
