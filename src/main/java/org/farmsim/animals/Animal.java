@@ -3,11 +3,10 @@ package org.farmsim.animals;
 public class Animal {
 	
 	private String species;
-	private int happiness;
+	public int happiness;
 	
-	public Animal(String type, int excitement) {
-		species = type;
-		happiness = excitement;
+	public Animal() {
+		
 	}
 	
 	public String getSpecies() {
@@ -15,7 +14,7 @@ public class Animal {
 	}
 	
 	public void play() {
-		happiness += 1;
+		happiness += 10;
 	}
 	
 	public int getHappy() {

@@ -5,7 +5,7 @@ public class Sheep extends Animal {
 	public int woolLevel=10;
 	
 	public Sheep() {
-		super("Sheep", 1);
+		super();
 	}
 	
 	public void Sheer() {

@@ -5,7 +5,7 @@ public class Cow extends Animal {
 	public int milkAmount=10;
 	
 	public Cow() {
-		super("Cow", 1);
+		super();
 	}
 	
 	public void milk() {
