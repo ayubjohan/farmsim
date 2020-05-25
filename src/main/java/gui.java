@@ -314,7 +314,7 @@ public class Gui extends JFrame {
 		farmPanel.add(btnharvest);
 		
 		final JLabel lblNewLabel_27 = new JLabel("");
-		lblNewLabel_27.setIcon(new ImageIcon(gui.class.getResource("/images/afsic_smallfarmsis233844.jpg")));
+		lblNewLabel_27.setIcon(new ImageIcon(Gui.class.getResource("/images/afsic_smallfarmsis233844.jpg")));
 		lblNewLabel_27.setBounds(172, 53, 197, 127);
 		farmPanel.add(lblNewLabel_27);
 		
@@ -505,7 +505,7 @@ public class Gui extends JFrame {
 		animalPanel.add(btnchicken);
 		
 		final JLabel lblNewLabel_28 = new JLabel("");
-		lblNewLabel_28.setIcon(new ImageIcon(gui.class.getResource("/images/images (1).jpg")));
+		lblNewLabel_28.setIcon(new ImageIcon(Gui.class.getResource("/images/images (1).jpg")));
 		lblNewLabel_28.setBounds(163, 40, 200, 92);
 		animalPanel.add(lblNewLabel_28);
 		
@@ -729,7 +729,7 @@ public class Gui extends JFrame {
 		gamePanel.add(btnNextDay);
 		
 		final JLabel lblNewLabel_25 = new JLabel("");
-		lblNewLabel_25.setIcon(new ImageIcon(gui.class.getResource("/images/MysteriousShamingDevice.jpg")));
+		lblNewLabel_25.setIcon(new ImageIcon(Gui.class.getResource("/images/MysteriousShamingDevice.jpg")));
 		lblNewLabel_25.setBounds(457, 11, 126, 138);
 		gamePanel.add(lblNewLabel_25);
 		
@@ -874,7 +874,7 @@ public class Gui extends JFrame {
 		itemPanel.add(lblNewLabel_24);
 		
 		final JLabel lblNewLabel_26 = new JLabel("");
-		lblNewLabel_26.setIcon(new ImageIcon(gui.class.getResource("/images/images.jpg")));
+		lblNewLabel_26.setIcon(new ImageIcon(Gui.class.getResource("/images/images.jpg")));
 		lblNewLabel_26.setBounds(172, 55, 232, 130);
 		itemPanel.add(lblNewLabel_26);
 		
