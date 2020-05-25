@@ -1,14 +1,15 @@
 package org.farmsim.items;
 
 public class Item {
-	private boolean used;
+	public int irrigation;
+	public int seed;
+	public int fertiliser;
 	
-	public Item () {
-		System.out.println("Hello");
+	public Item (int irr, int s, int fert) {
+		irrigation = irr;
+		seed = s;
+		fertiliser = fert;
 	}
 	
-	public void use () {
-		this.used = false;
-		System.out.println("You used me");
-	}
+	
 }

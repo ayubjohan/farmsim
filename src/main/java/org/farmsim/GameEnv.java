@@ -5,7 +5,7 @@ import org.farmsim.items.Item;
 import org.farmsim.Farm;
 
 public class GameEnv {
-	public int defaultStartingCash = 1000;
+	public int defaultStartingCash = 200;
 	public int defaultGameLength = 7; // days
 	
 	public String name;
