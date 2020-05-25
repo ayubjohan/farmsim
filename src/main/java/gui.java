@@ -4,6 +4,7 @@ import org.farmsim.animals.Animal;
 import org.farmsim.animals.Chicken;
 import org.farmsim.animals.Cow;
 import org.farmsim.animals.Sheep;
+import org.farmsim.items.Item;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,10 +16,13 @@ import java.awt.CardLayout;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 
 public class Gui extends JFrame {
 
@@ -34,7 +38,8 @@ public class Gui extends JFrame {
     private Farm ul_farm;
     private Farm dl_farm;
     private Farm av_farm;
-
+	public int day = 1;
+	public int actions = 0;
 
 	/**
 	 * Launch the application.
@@ -57,19 +62,19 @@ public class Gui extends JFrame {
 	 */
 	public Gui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 629, 300);
+		setBounds(100, 100, 1213, 432);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		final JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(10, 54, 593, 196);
+		layeredPane.setBounds(385, 116, 593, 196);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 		
 		final JPanel Details = new JPanel();
-		Details.setBackground(Color.RED);
+		Details.setBackground(Color.LIGHT_GRAY);
 		layeredPane.add(Details, "name_1038316804179000");
 		Details.setLayout(null);
 		
@@ -91,7 +96,6 @@ public class Gui extends JFrame {
 		lblNewLabel_2.setBounds(173, 11, 242, 14);
 		Details.add(lblNewLabel_2);
 		
-		
 		txtFarmerName = new JTextField();
 		txtFarmerName.setBounds(423, 46, 86, 20);
 		Details.add(txtFarmerName);
@@ -108,7 +112,7 @@ public class Gui extends JFrame {
 		Details.add(txtDuration);
 		
 		final JPanel animalPanel = new JPanel();
-		animalPanel.setBackground(Color.GREEN);
+		animalPanel.setBackground(Color.LIGHT_GRAY);
 		layeredPane.add(animalPanel, "name_1038319494741300");
 		animalPanel.setLayout(null);
 		
@@ -172,7 +176,7 @@ public class Gui extends JFrame {
 		
 		
 		final JPanel farmPanel = new JPanel();
-		farmPanel.setBackground(Color.CYAN);
+		farmPanel.setBackground(Color.LIGHT_GRAY);
 		layeredPane.add(farmPanel, "name_1038321406219800");
 		farmPanel.setLayout(null);
 		
@@ -185,6 +189,15 @@ public class Gui extends JFrame {
 		final JLabel lblNewLabel_13 = new JLabel("Farm Health:");
 		lblNewLabel_13.setBounds(376, 44, 80, 14);
 		farmPanel.add(lblNewLabel_13);
+		
+		final JPanel itemPanel = new JPanel();
+		itemPanel.setBackground(Color.LIGHT_GRAY);
+		layeredPane.add(itemPanel, "name_1038326610564000");
+		itemPanel.setLayout(null);
+		
+		final JLabel lblcashItem = new JLabel("New label");
+		lblcashItem.setBounds(256, 30, 46, 14);
+		itemPanel.add(lblcashItem);
 		
 		final JLabel lblNewLabel_14 = new JLabel("Water Quality:");
 		lblNewLabel_14.setBounds(376, 83, 93, 14);
@@ -224,184 +237,289 @@ public class Gui extends JFrame {
 		farmPanel.add(lblcashFarm);
 		
 		final JButton btnTendToFarmland = new JButton("Tend To Farmland");
+		btnTendToFarmland.setBackground(Color.CYAN);
 		btnTendToFarmland.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = Integer.parseInt(lblfarmHealth.getText());
-				int p = a += 20;
-				lblfarmHealth.setText(Integer.toString(p));
-				int d = Integer.parseInt(lblwater.getText());
-				// int c = d += 20; // What was this for?
-				lblwater.setText(Integer.toString(d));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					int a = Integer.parseInt(lblfarmHealth.getText());
+					int p = a += 20;
+					lblfarmHealth.setText(Integer.toString(p));
+					int d = Integer.parseInt(lblwater.getText());
+					int c = d += 20;
+					lblwater.setText(Integer.toString(d));
+					int l = Integer.parseInt(lblsoil.getText());
+					l += 20;
+					lblsoil.setText(Integer.toString(l));
+				}
+				
 			}
 		});
 		btnTendToFarmland.setBounds(10, 162, 152, 23);
 		farmPanel.add(btnTendToFarmland);
 		
 		final JButton btncrops = new JButton("Tend To Crops");
+		btncrops.setBackground(Color.CYAN);
 		btncrops.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = Integer.parseInt(lblcrop.getText());
-				int d = a += 20;
-				lblcrop.setText(Integer.toString(d));
-				int l = Integer.parseInt(lblfarmHealth.getText());
-				int p = l += 20;
-				lblfarmHealth.setText(Integer.toString(p));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					int a = Integer.parseInt(lblcrop.getText());
+					int d = a += 20;
+					lblcrop.setText(Integer.toString(d));
+					int l = Integer.parseInt(lblfarmHealth.getText());
+					int p = l += 20;
+					lblfarmHealth.setText(Integer.toString(p));
+				}
+				
 			}
 		});
 		btncrops.setBounds(10, 29, 152, 23);
 		farmPanel.add(btncrops);
 		
 		final JButton btnharvest = new JButton("Sell Harvest");
+		btnharvest.setBackground(Color.CYAN);
 		btnharvest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = Integer.parseInt(lblcash.getText());
-				int d = a += 500;
-				lblcash.setText(Integer.toString(d));
-				lblcashFarm.setText(Integer.toString(d));
-				int l = Integer.parseInt(lblfarmHealth.getText());
-				int p = l -= 20;
-				lblfarmHealth.setText(Integer.toString(p));
-				int f = Integer.parseInt(lblsoil.getText());
-				int q = f -= 20;
-				lblsoil.setText(Integer.toString(q));
-				int s = Integer.parseInt(lblcrop.getText());
-				int v = s -= 20;
-				lblcrop.setText(Integer.toString(v));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					int a = Integer.parseInt(lblcash.getText());
+					int d = a += 500;
+					lblcash.setText(Integer.toString(d));
+					lblcashFarm.setText(Integer.toString(d));
+					lblcashItem.setText(Integer.toString(d));
+					int l = Integer.parseInt(lblfarmHealth.getText());
+					int p = l -= 20;
+					lblfarmHealth.setText(Integer.toString(p));
+					int f = Integer.parseInt(lblsoil.getText());
+					int q = f -= 20;
+					lblsoil.setText(Integer.toString(q));
+					int s = Integer.parseInt(lblcrop.getText());
+					int v = s -= 20;
+					lblcrop.setText(Integer.toString(v));
+				}
+				
 			}
 		});
 		btnharvest.setBounds(10, 95, 152, 23);
 		farmPanel.add(btnharvest);
 		
+		final JLabel lblNewLabel_27 = new JLabel("");
+		lblNewLabel_27.setIcon(new ImageIcon(gui.class.getResource("/images/afsic_smallfarmsis233844.jpg")));
+		lblNewLabel_27.setBounds(172, 53, 197, 127);
+		farmPanel.add(lblNewLabel_27);
+		
+		final JLabel lblNewLabel_29 = new JLabel("+$500");
+		lblNewLabel_29.setBounds(61, 83, 46, 14);
+		farmPanel.add(lblNewLabel_29);
+		
 		final JButton btnSellWool = new JButton("Sell Wool");
+		btnSellWool.setBackground(Color.CYAN);
 		btnSellWool.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = Integer.parseInt(lblcash.getText());
-				int d = a += 30;
-				lblcash.setText(Integer.toString(d));
-				lblcashFarm.setText(Integer.toString(d));
-				int l = Integer.parseInt(lblsheepStat.getText());
-				int f = l -= 5;
-				lblsheepStat.setText(Integer.toString(f));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					int a = Integer.parseInt(lblcash.getText());
+					int d = a += 30;
+					lblcash.setText(Integer.toString(d));
+					lblcashFarm.setText(Integer.toString(d));
+					lblcashItem.setText(Integer.toString(d));
+					int l = Integer.parseInt(lblsheepStat.getText());
+					int f = l -= 5;
+					lblsheepStat.setText(Integer.toString(f));
+				}
+				
 			}
 		});
 		btnSellWool.setBounds(310, 162, 89, 23);
 		animalPanel.add(btnSellWool);
 		
 		final JButton btnSellMilk = new JButton("Sell Milk");
+		btnSellMilk.setBackground(Color.CYAN);
 		btnSellMilk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int a = Integer.parseInt(lblcash.getText());
-				int d = a += 50;
-				lblcash.setText(Integer.toString(d));
-				lblcashFarm.setText(Integer.toString(d));
-				int l = Integer.parseInt(lblcowStat.getText());
-				int f = l -= 5;
-				lblcowStat.setText(Integer.toString(f));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					int a = Integer.parseInt(lblcash.getText());
+					int d = a += 50;
+					lblcash.setText(Integer.toString(d));
+					lblcashFarm.setText(Integer.toString(d));
+					lblcashItem.setText(Integer.toString(d));
+					int l = Integer.parseInt(lblcowStat.getText());
+					int f = l -= 5;
+					lblcowStat.setText(Integer.toString(f));
+				}
+				
 			}
 		});
 		btnSellMilk.setBounds(163, 162, 89, 23);
 		animalPanel.add(btnSellMilk);
 		
 		final JButton btnSellEggs = new JButton("Sell Eggs");
+		btnSellEggs.setBackground(Color.CYAN);
 		btnSellEggs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int a = Integer.parseInt(lblcash.getText());
-				int d = a += 20;
-				lblcash.setText(Integer.toString(d));
-				lblcashFarm.setText(Integer.toString(d));
-				int l = Integer.parseInt(lblchickenStat.getText());
-				int f = l -= 5;
-				lblchickenStat.setText(Integer.toString(f));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					int a = Integer.parseInt(lblcash.getText());
+					int d = a += 20;
+					lblcash.setText(Integer.toString(d));
+					lblcashFarm.setText(Integer.toString(d));
+					lblcashItem.setText(Integer.toString(d));
+					int l = Integer.parseInt(lblchickenStat.getText());
+					int f = l -= 5;
+					lblchickenStat.setText(Integer.toString(f));
+				}
+				
 			}
 		});
 		btnSellEggs.setBounds(10, 162, 113, 23);
 		animalPanel.add(btnSellEggs);
 		
 		final JPanel gamePanel = new JPanel();
-		gamePanel.setBackground(Color.YELLOW);
+		gamePanel.setBackground(Color.LIGHT_GRAY);
 		layeredPane.add(gamePanel, "name_1038323819769800");
 		gamePanel.setLayout(null);
 		
 		final JLabel lblNewLabel_3 = new JLabel("Day No.");
-		lblNewLabel_3.setBounds(33, 34, 46, 14);
+		lblNewLabel_3.setBounds(10, 11, 46, 14);
 		gamePanel.add(lblNewLabel_3);
 		
 		final JLabel lblDaysNo = new JLabel("New label");
-		lblDaysNo.setBounds(89, 34, 100, 14);
+		lblDaysNo.setBounds(53, 11, 126, 14);
 		gamePanel.add(lblDaysNo);
 		
 		final JLabel lblNewLabel_5 = new JLabel("Farmer Name:");
-		lblNewLabel_5.setBounds(199, 34, 84, 14);
+		lblNewLabel_5.setBounds(10, 34, 84, 14);
 		gamePanel.add(lblNewLabel_5);
 		
 		final JLabel lblFarmerName = new JLabel("New label");
-		lblFarmerName.setBounds(293, 34, 75, 14);
+		lblFarmerName.setBounds(92, 34, 126, 14);
 		gamePanel.add(lblFarmerName);
 		
 		final JLabel lblNewLabel_7 = new JLabel("Farm Name:");
-		lblNewLabel_7.setBounds(378, 34, 75, 14);
+		lblNewLabel_7.setBounds(169, 34, 75, 14);
 		gamePanel.add(lblNewLabel_7);
 		
 		final JLabel lblFarmName = new JLabel("New label");
-		lblFarmName.setBounds(463, 34, 84, 14);
+		lblFarmName.setBounds(242, 34, 126, 14);
 		gamePanel.add(lblFarmName);
 		
 		final JButton btnUltimateFarm = new JButton("Ultimate Farm");
 		
-		btnUltimateFarm.setBackground(Color.RED);
+		btnUltimateFarm.setBackground(Color.CYAN);
 		btnUltimateFarm.setBounds(242, 103, 126, 23);
 		gamePanel.add(btnUltimateFarm);
 		
 		final JButton btnDeluxeFarm = new JButton("Deluxe Farm");
 		
-		btnDeluxeFarm.setBackground(Color.RED);
+		btnDeluxeFarm.setBackground(Color.CYAN);
 		btnDeluxeFarm.setBounds(38, 162, 126, 23);
 		gamePanel.add(btnDeluxeFarm);
 		
 		final JButton btnAverageFarm = new JButton("Average Farm");
-		btnAverageFarm.setBackground(Color.RED);
+		btnAverageFarm.setBackground(Color.CYAN);
 		
 		btnAverageFarm.setBounds(242, 162, 126, 23);
 		gamePanel.add(btnAverageFarm);
 		
 		final JButton btnsheep = new JButton("Play-Feed Sheep");
+		btnsheep.setBackground(Color.CYAN);
 		btnsheep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (Gui.this.bd_farm != null & Gui.this.ul_farm != null & Gui.this.dl_farm != null) {
-					int a = Integer.parseInt(lblsheepStat.getText());
-					int d = a += 20;
-					lblsheepStat.setText(Integer.toString(d));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					if (bd_farm != null & ul_farm != null & dl_farm != null) {
+						int a = Integer.parseInt(lblsheepStat.getText());
+						int d = a += 20;
+						lblsheepStat.setText(Integer.toString(d));
+					}
 				}
+				
 			}
 		});
 		btnsheep.setBounds(10, 11, 143, 23);
 		animalPanel.add(btnsheep);
 		
 		final JButton btncow = new JButton("Play-Feed Cow");
+		btncow.setBackground(Color.CYAN);
 		btncow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Gui.this.bd_farm != null & Gui.this.ul_farm != null & Gui.this.dl_farm != null) {
-					int a = Integer.parseInt(lblcowStat.getText());
-					int d = a += 20;
-					lblcowStat.setText(Integer.toString(d));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					if (bd_farm != null & ul_farm != null & dl_farm != null) {
+						int a = Integer.parseInt(lblcowStat.getText());
+						int d = a += 20;
+						lblcowStat.setText(Integer.toString(d));
+					}
 				}
+				
 			}
 		});
 		btncow.setBounds(10, 107, 143, 23);
 		animalPanel.add(btncow);
 		
 		final JButton btnchicken = new JButton("Play-Feed Chicken");
+		btnchicken.setBackground(Color.CYAN);
 		btnchicken.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (Gui.this.bd_farm != null & Gui.this.ul_farm != null & Gui.this.dl_farm != null) {
-					int a = Integer.parseInt(lblchickenStat.getText());
-					int d = a += 20;
-					lblchickenStat.setText(Integer.toString(d));
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					actions += 1;
+					if (bd_farm != null & ul_farm != null & dl_farm != null) {
+						int a = Integer.parseInt(lblchickenStat.getText());
+						int d = a += 20;
+						lblchickenStat.setText(Integer.toString(d));
+					}
 				}
+				
 			}
 		});
 		btnchicken.setBounds(10, 61, 143, 23);
 		animalPanel.add(btnchicken);
+		
+		final JLabel lblNewLabel_28 = new JLabel("");
+		lblNewLabel_28.setIcon(new ImageIcon(gui.class.getResource("/images/images (1).jpg")));
+		lblNewLabel_28.setBounds(163, 40, 200, 92);
+		animalPanel.add(lblNewLabel_28);
+		
+		final JLabel lblNewLabel_30 = new JLabel("+$20");
+		lblNewLabel_30.setBounds(42, 147, 46, 14);
+		animalPanel.add(lblNewLabel_30);
+		
+		final JLabel lblNewLabel_31 = new JLabel("+$50");
+		lblNewLabel_31.setBounds(186, 147, 46, 14);
+		animalPanel.add(lblNewLabel_31);
+		
+		final JLabel lblNewLabel_32 = new JLabel("+$30");
+		lblNewLabel_32.setBounds(330, 147, 46, 14);
+		animalPanel.add(lblNewLabel_32);
 		
 		final JButton btnBadFarm = new JButton("Bad Farm");
 		btnBadFarm.addActionListener(new ActionListener() {
@@ -427,7 +545,7 @@ public class Gui extends JFrame {
 				gamePanel.revalidate();
 			}
 		});
-		btnBadFarm.setBackground(Color.RED);
+		btnBadFarm.setBackground(Color.CYAN);
 		btnBadFarm.setBounds(458, 162, 89, 23);
 		gamePanel.add(btnBadFarm);
 		
@@ -502,22 +620,266 @@ public class Gui extends JFrame {
 		});
 		
 		final JLabel lblNewLabel_4 = new JLabel("Choose Your Farm Type");
-		lblNewLabel_4.setFont(new Font("Algerian", Font.PLAIN, 16));
-		lblNewLabel_4.setBounds(209, 59, 254, 14);
+		lblNewLabel_4.setFont(new Font("Arial Black", Font.BOLD, 16));
+		lblNewLabel_4.setBounds(153, 59, 254, 33);
 		gamePanel.add(lblNewLabel_4);
 		
+		final JLabel lblNewLabel_18 = new JLabel("Cash:");
+		lblNewLabel_18.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.BOLD, 16));
+		lblNewLabel_18.setBounds(206, 30, 46, 14);
+		itemPanel.add(lblNewLabel_18);
+		
+		final JLabel lblNewLabel_19 = new JLabel("ITEM SHOP INVENTORY");
+		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_19.setBounds(361, 30, 222, 14);
+		itemPanel.add(lblNewLabel_19);
+		
+		final JLabel lblFertiliser = new JLabel("Fertiliser:");
+		lblFertiliser.setBounds(414, 70, 69, 14);
+		itemPanel.add(lblFertiliser);
+		
+		final JLabel lblNewLabel_21 = new JLabel("Irrigation System:");
+		lblNewLabel_21.setBounds(405, 112, 120, 14);
+		itemPanel.add(lblNewLabel_21);
+		
+		final JLabel lblSeeddrills = new JLabel("Seed-Drills:");
+		lblSeeddrills.setBounds(413, 158, 92, 14);
+		itemPanel.add(lblSeeddrills);
+		
+		final JLabel lblNewLabel_20 = new JLabel("Left");
+		lblNewLabel_20.setBounds(561, 70, 46, 14);
+		itemPanel.add(lblNewLabel_20);
+		
+		final JLabel lblLeft = new JLabel("Left");
+		lblLeft.setBounds(561, 112, 46, 14);
+		itemPanel.add(lblLeft);
+		
+		final JLabel lblLeft_1 = new JLabel("Left");
+		lblLeft_1.setBounds(561, 158, 46, 14);
+		itemPanel.add(lblLeft_1);
+		
+		final JLabel lblfertiliser = new JLabel("New label");
+		lblfertiliser.setBounds(505, 70, 46, 14);
+		itemPanel.add(lblfertiliser);
+		
+		final JLabel lblirrigation = new JLabel("New label");
+		lblirrigation.setBounds(521, 112, 30, 14);
+		itemPanel.add(lblirrigation);
+		
+		final JLabel lblseed = new JLabel("New label");
+		lblseed.setBounds(505, 158, 46, 14);
+		itemPanel.add(lblseed);
+		
 		final JButton btnNextDay = new JButton("Next Day");
-		btnNextDay.setBackground(Color.RED);
+		btnNextDay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int a = Integer.parseInt(txtDuration.getText());
+				if (a == day) {
+					int cash = Integer.parseInt(lblcash.getText());
+					int prof = cash - 200;
+					int score = 0;
+					if (prof>20) {
+						score = 100;
+					}
+					if (prof>100) {
+						score = 200;
+					}
+					if (prof<20) {
+						score = 10;
+					}
+					if (prof<=0) {
+						score = 1;
+					}
+					JOptionPane.showMessageDialog(null, "Well Done, you have completed the farm simulator game." + "\n"+ "have made a profit of $" + Integer.toString(prof) + "\n" + "your final score is " + Integer.toString(score), "GAME OVER!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					day += 1;
+					if (day == 3) {
+						JOptionPane.showMessageDialog(null, "there has been a drought your farm has been heavily damadged.", "DISASTER!", JOptionPane.PLAIN_MESSAGE); 
+						lblfarmHealth.setText(Integer.toString(0));
+						lblwater.setText(Integer.toString(0));
+						lblsoil.setText(Integer.toString(0));
+					}
+					if (day == 5) {
+						JOptionPane.showMessageDialog(null, "some of your animals have escaped, your remaining animals are very sad :(", "DISASTER!", JOptionPane.PLAIN_MESSAGE); 
+						lblchickenStat.setText(Integer.toString(0));
+						lblcowStat.setText(Integer.toString(0));
+						lblsheepStat.setText(Integer.toString(0));
+					}
+					if (day == 7) {
+						JOptionPane.showMessageDialog(null, "you won the top award at the animal country fair. you've won prize money :)", "CONGRATULATIONS!", JOptionPane.PLAIN_MESSAGE); 
+						int a1 = Integer.parseInt(lblcash.getText());
+						a1 += 200;
+						lblcash.setText(Integer.toString(a1));
+						lblcashFarm.setText(Integer.toString(a1));
+						lblcashItem.setText(Integer.toString(a1));
+
+					}
+					actions = 0;
+					lblDaysNo.setText(Integer.toString(day));
+					//shop re-stock
+					lblirrigation.setText(Integer.toString(2));
+					lblseed.setText(Integer.toString(2));
+					lblfertiliser.setText(Integer.toString(2));
+				}
+			}
+		});
+		btnNextDay.setBackground(Color.CYAN);
 		btnNextDay.setBounds(23, 59, 89, 23);
 		gamePanel.add(btnNextDay);
 		
-		final JPanel itemPanel = new JPanel();
-		itemPanel.setBackground(Color.ORANGE);
-		layeredPane.add(itemPanel, "name_1038326610564000");
-		itemPanel.setLayout(null);
+		final JLabel lblNewLabel_25 = new JLabel("");
+		lblNewLabel_25.setIcon(new ImageIcon(gui.class.getResource("/images/MysteriousShamingDevice.jpg")));
+		lblNewLabel_25.setBounds(457, 11, 126, 138);
+		gamePanel.add(lblNewLabel_25);
+		
+		final JButton btnseedDrills = new JButton("Buy Seed-Drills");
+		btnseedDrills.setBackground(Color.CYAN);
+		btnseedDrills.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					int p = Integer.parseInt(lblcash.getText());
+					if (p-20 < 0) {
+						JOptionPane.showMessageDialog(null, "sell something and make money.", "NO MONEY!", JOptionPane.PLAIN_MESSAGE); 
+					}else {
+						actions += 1;
+						int a = Integer.parseInt(lblseed.getText());
+						if (a == 0) {
+							JOptionPane.showMessageDialog(null, "Seed-Drills are out of stock, we restock tomorrow!", "OUT OF STOCK!", JOptionPane.PLAIN_MESSAGE); 
+						
+						}else {
+							a -= 1;
+							lblseed.setText(Integer.toString(a));
+							int l = Integer.parseInt(lblfarmHealth.getText());
+							l += 20;
+							lblfarmHealth.setText(Integer.toString(l));
+							int d = Integer.parseInt(lblcrop.getText());
+							d += 20;
+							lblcrop.setText(Integer.toString(d));
+							int d1 = Integer.parseInt(lblsoil.getText());
+							d1 += 10;
+							lblsoil.setText(Integer.toString(d1));
+							int c = Integer.parseInt(lblcash.getText());
+							c -= 20;
+							lblcash.setText(Integer.toString(c));
+							lblcashFarm.setText(Integer.toString(c));
+							lblcashItem.setText(Integer.toString(c));
+							
+						}
+					}
+					
+				}
+				
+			}
+		});
+		btnseedDrills.setBounds(10, 149, 161, 23);
+		itemPanel.add(btnseedDrills);
+		
+		final JButton btnirragation = new JButton("Buy Irrigation System");
+		btnirragation.setBackground(Color.CYAN);
+		btnirragation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					int p = Integer.parseInt(lblcash.getText());
+					if (p-100 < 0) {
+						JOptionPane.showMessageDialog(null, "sell something and make money.", "NO MONEY!", JOptionPane.PLAIN_MESSAGE); 
+					}else {
+						actions += 1;
+						int a = Integer.parseInt(lblirrigation.getText());
+						if (a == 0) {
+							JOptionPane.showMessageDialog(null, "Irrigation-System's are out of stock, we restock tomorrow!", "OUT OF STOCK!", JOptionPane.PLAIN_MESSAGE); 
+						
+						}else {
+							a -= 1;
+							lblirrigation.setText(Integer.toString(a));
+							int l = Integer.parseInt(lblfarmHealth.getText());
+							l += 20;
+							lblfarmHealth.setText(Integer.toString(l));
+							int f = Integer.parseInt(lblwater.getText());
+							f += 20;
+							lblwater.setText(Integer.toString(f));
+							int c = Integer.parseInt(lblcash.getText());
+							c -= 100;
+							lblcash.setText(Integer.toString(c));
+							lblcashFarm.setText(Integer.toString(c));
+							lblcashItem.setText(Integer.toString(c));
+						}
+					}
+					
+				}
+				
+			}
+		});
+		btnirragation.setBounds(10, 87, 161, 23);
+		itemPanel.add(btnirragation);
+		
+		final JButton btnfertiliser = new JButton("Buy-Use Fertiliser");
+		btnfertiliser.setBackground(Color.CYAN);
+		btnfertiliser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (actions == 2) {
+					JOptionPane.showMessageDialog(null, "You are out of actions go to the next day.", "OUT OF ACTIONS!", JOptionPane.PLAIN_MESSAGE); 
+
+				}else {
+					int p = Integer.parseInt(lblcash.getText());
+					if (p-40 < 0) {
+						JOptionPane.showMessageDialog(null, "sell something and make money.", "NO MONEY!", JOptionPane.PLAIN_MESSAGE); 
+					}else {
+						actions += 1;
+						int a = Integer.parseInt(lblfertiliser.getText());
+						if (a == 0) {
+							JOptionPane.showMessageDialog(null, "fertiliser is out of stock, we restock tomorrow!", "OUT OF STOCK!", JOptionPane.PLAIN_MESSAGE); 
+						
+						}else {
+							a -= 1;
+							lblfertiliser.setText(Integer.toString(a));
+							int d = Integer.parseInt(lblsoil.getText());
+							d += 20;
+							lblsoil.setText(Integer.toString(d));
+							int l = Integer.parseInt(lblfarmHealth.getText());
+							l += 20;
+							lblfarmHealth.setText(Integer.toString(l));
+							int c = Integer.parseInt(lblcash.getText());
+							c -= 40;
+							lblcash.setText(Integer.toString(c));
+							lblcashFarm.setText(Integer.toString(c));
+							lblcashItem.setText(Integer.toString(c));
+						}
+					}
+					
+
+				}
+							
+			}
+		});
+		btnfertiliser.setBounds(10, 26, 161, 23);
+		itemPanel.add(btnfertiliser);
+		
+		final JLabel lblNewLabel_22 = new JLabel("$40");
+		lblNewLabel_22.setBounds(78, 11, 46, 14);
+		itemPanel.add(lblNewLabel_22);
+		
+		final JLabel lblNewLabel_23 = new JLabel("$100");
+		lblNewLabel_23.setBounds(78, 70, 46, 14);
+		itemPanel.add(lblNewLabel_23);
+		
+		final JLabel lblNewLabel_24 = new JLabel("$20");
+		lblNewLabel_24.setBounds(78, 132, 46, 14);
+		itemPanel.add(lblNewLabel_24);
+		
+		final JLabel lblNewLabel_26 = new JLabel("");
+		lblNewLabel_26.setIcon(new ImageIcon(gui.class.getResource("/images/images.jpg")));
+		lblNewLabel_26.setBounds(172, 55, 232, 130);
+		itemPanel.add(lblNewLabel_26);
 		
 		final JButton btnGamePanel = new JButton("Game");
-		btnGamePanel.setBackground(Color.YELLOW);
+		btnGamePanel.setBackground(Color.CYAN);
 		btnGamePanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				layeredPane.removeAll();
@@ -526,43 +888,59 @@ public class Gui extends JFrame {
 				layeredPane.revalidate();
 			}
 		});
-		btnGamePanel.setBounds(126, 20, 89, 23);
+		btnGamePanel.setBounds(517, 82, 89, 23);
 		contentPane.add(btnGamePanel);
 		
 		final JButton btnStartGame = new JButton("Start Game!");
-		btnStartGame.setBackground(Color.MAGENTA);
+		btnStartGame.setBackground(Color.CYAN);
 		btnStartGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Have fun " + txtFarmerName.getText() + " you have " + txtDuration.getText() + " days.", "Welcome", JOptionPane.PLAIN_MESSAGE); 
+			public void actionPerformed(ActionEvent e) { 
+				Pattern p = Pattern.compile("[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]");
+				Matcher m = p.matcher(txtFarmerName.getText());
+				boolean b = m.find();
 
-				layeredPane.removeAll();
-				layeredPane.add(gamePanel);
-				layeredPane.repaint();
-				layeredPane.revalidate();
-				if ((txtFarmerName.getText() != null && !txtFarmerName.getText().isEmpty())) {
-					lblFarmerName.setText(txtFarmerName.getText());
+				if ( b || txtFarmerName.getText().length() < 3 || txtFarmerName.getText().length() > 15 || Integer.parseInt(txtDuration.getText()) < 5 || Integer.parseInt(txtDuration.getText()) > 10) {
+					JOptionPane.showMessageDialog(null, "duration must be between 5-10 and name must be between 3-15 characters also no special characters in your name.", "Error", JOptionPane.PLAIN_MESSAGE); 
 					
-				} else {
-					lblFarmerName.setText("choose Farmer Name");
-				}
-				
-				if ((txtFarmName.getText() != null && !txtFarmName.getText().isEmpty())) {
-					lblFarmName.setText(txtFarmName.getText());
+
+				}else {
+
+					JOptionPane.showMessageDialog(null, "Have fun " + txtFarmerName.getText() + " you have " + txtDuration.getText() + " days.", "Welcome", JOptionPane.PLAIN_MESSAGE); 
+
+					layeredPane.removeAll();
+					layeredPane.add(gamePanel);
+					layeredPane.repaint();
+					layeredPane.revalidate();
+					if ((txtFarmerName.getText() != null && !txtFarmerName.getText().isEmpty())) {
+						lblFarmerName.setText(txtFarmerName.getText());
+						
+					} else {
+						lblFarmerName.setText("choose Farmer Name");
+					}
 					
-				} else {
-					lblFarmName.setText("choose Farm Name");
-				}
-				
-				if ((txtDuration.getText() != null && !txtDuration.getText().isEmpty())) {
-					lblDaysNo.setText(txtDuration.getText());
+					if ((txtFarmName.getText() != null && !txtFarmName.getText().isEmpty())) {
+						lblFarmName.setText(txtFarmName.getText());
+						
+					} else {
+						lblFarmName.setText("choose Farm Name");
+					}
 					
-				} else {
-					lblDaysNo.setText("choose Duration");
+					if ((txtDuration.getText() != null && !txtDuration.getText().isEmpty())) {
+						lblDaysNo.setText(Integer.toString(day));
+						
+					} else {
+						lblDaysNo.setText("choose Duration");
+					}
+					
+					GameEnv game = new GameEnv(txtFarmerName.getText(), Integer.parseInt(txtDuration.getText()));
+					Item item = new Item(2, 2, 2);
+					lblfertiliser.setText(Integer.toString(item.fertiliser));
+					lblirrigation.setText(Integer.toString(item.irrigation));
+					lblseed.setText(Integer.toString(item.seed));
+					lblcashItem.setText(Integer.toString(game.defaultStartingCash));
+					lblcash.setText(Integer.toString(game.defaultStartingCash));
+					lblcashFarm.setText(Integer.toString(game.defaultStartingCash));;
 				}
-				
-				GameEnv game = new GameEnv(txtFarmerName.getText(), Integer.parseInt(txtDuration.getText()));
-				lblcash.setText(Integer.toString(game.defaultStartingCash));
-				lblcashFarm.setText(Integer.toString(game.defaultStartingCash));;
 			}
 		});
 		btnStartGame.setBounds(21, 162, 124, 23);
@@ -570,7 +948,7 @@ public class Gui extends JFrame {
 		
 		
 		final JButton btnAnimalsPanel = new JButton("Animals");
-		btnAnimalsPanel.setBackground(Color.YELLOW);
+		btnAnimalsPanel.setBackground(Color.CYAN);
 		btnAnimalsPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				layeredPane.removeAll();
@@ -579,11 +957,11 @@ public class Gui extends JFrame {
 				layeredPane.revalidate();
 			}
 		});
-		btnAnimalsPanel.setBounds(240, 20, 89, 23);
+		btnAnimalsPanel.setBounds(640, 82, 89, 23);
 		contentPane.add(btnAnimalsPanel);
 		
 		final JButton btnFarm = new JButton("Farm");
-		btnFarm.setBackground(Color.YELLOW);
+		btnFarm.setBackground(Color.CYAN);
 		btnFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				layeredPane.removeAll();
@@ -592,11 +970,11 @@ public class Gui extends JFrame {
 				layeredPane.revalidate();
 			}
 		});
-		btnFarm.setBounds(367, 20, 89, 23);
+		btnFarm.setBounds(772, 82, 89, 23);
 		contentPane.add(btnFarm);
 		
 		final JButton btnItems = new JButton("Items");
-		btnItems.setBackground(Color.YELLOW);
+		btnItems.setBackground(Color.CYAN);
 		btnItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				layeredPane.removeAll();
@@ -605,11 +983,11 @@ public class Gui extends JFrame {
 				layeredPane.revalidate();
 			}
 		});
-		btnItems.setBounds(500, 20, 89, 23);
+		btnItems.setBounds(889, 82, 89, 23);
 		contentPane.add(btnItems);
 		
 		final JButton btnStartPanel = new JButton("Details");
-		btnStartPanel.setBackground(Color.YELLOW);
+		btnStartPanel.setBackground(Color.CYAN);
 		btnStartPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				layeredPane.removeAll();
@@ -618,7 +996,7 @@ public class Gui extends JFrame {
 				layeredPane.revalidate();
 			}
 		});
-		btnStartPanel.setBounds(10, 20, 89, 23);
+		btnStartPanel.setBounds(391, 82, 89, 23);
 		contentPane.add(btnStartPanel);
 	}
 }
