@@ -15,18 +15,27 @@ public class GameEnv {
 
 	public int balance;
 	public int day;
-	
-	public GameEnv(String name, int gameLength) {
+    
+    public static void main(String[] args) {
+        GameEnv testGameEnv = new GameEnv("Johan", 7);
+        try {
+            testGameEnv.nextDay();
+        } catch(Exception e) {
+            //..
+        }
+    }
+
+	public GameEnv(String name, int... gameLength) {
 		// Maybe a different farmer for every farm, so name should not go here?
 		// Check 3 <= name.length() <= 15
 		if (name.length() < 3 || name.length() > 15) {
 			throw new IllegalArgumentException("Name must be between 3 and 15 characters.");
 		}
 		this.name = name;
-		//this.gameLength = gameLength.length > 0 ? gameLength[0] : defaultGameLength;
-		//if (this.gameLength < 5 || this.gameLength > 10) {
-			//throw new IllegalArgumentException("Game length must be between 5 and 10 days.");
-		//}
+		this.gameLength = gameLength.length > 0 ? gameLength[0] : defaultGameLength;
+		if (this.gameLength < 5 || this.gameLength > 10) {
+			throw new IllegalArgumentException("Game length must be between 5 and 10 days.");
+		}
 		this.balance = defaultStartingCash;
 		this.day = 0;
 		this.inventory = new ArrayList<Item>();
@@ -41,6 +50,8 @@ public class GameEnv {
 	
 	public void nextDay() throws Exception {
         // Check you can advance to next day...
+        System.out.println(this.day);
+        System.out.println(this.gameLength);
         if (this.day >= this.gameLength) {
             throw new Exception("Can not proceed to next day on the final day. Instead call GameEnv.endGame()");
         }

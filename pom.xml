@@ -4,4 +4,20 @@
   <artifactId>farmsim</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Farm Sim</name>
+  <properties>
+    <maven.compiler.source>13</maven.compiler.source>
+    <maven.compiler.target>13</maven.compiler.target>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>13</source>
+          <target>13</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
